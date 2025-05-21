@@ -1,0 +1,68 @@
+import React from 'react';
+import styled from 'styled-components';
+import defaultImg from '../../assets/pokemonBall.png';
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+
+  background-color : #f8f8f8;
+  border-radius: 8px;
+  height: 25vh;
+
+  position: relative;
+`;
+
+const HeadText = styled.h1`
+  margin-top : 20px;
+  color: #ff0000;
+  font-weight: 600;
+  font-size: 28px;
+`;
+
+const MyPokemonDex = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  width: 100%; 
+  
+  position: absolute;
+  bottom: 20px;
+`;
+
+const PokemonBox = styled.div`
+  display:flex;
+  justify-content:center;
+  align-items : center;
+
+  background-color:#ffffff;
+  width: 100px;
+  height: 100px;
+  border: 2px dashed #cccccc;
+  border-radius: 8px;
+`;
+
+const DefaultImg = styled.img`
+  width: 60%;
+  height: 60%;
+`;
+
+export const Dashboard = () => {
+  const boxes = Array.from({ length: 6 }, (_, i) => i + 1);
+
+  return (
+    <Container>
+      <HeadText>나만의 포켓몬</HeadText>
+      <MyPokemonDex>
+        {boxes.map(num => (
+          <PokemonBox key={num}>
+            <DefaultImg src={defaultImg} alt='pokemon'/>
+          </PokemonBox>
+        ))}
+      </MyPokemonDex>
+    </Container>
+  );
+};
