@@ -5,7 +5,7 @@ const PokemonCardBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   padding-top: 5px;
 
   background-color:#ffffff;
@@ -33,12 +33,29 @@ const PokemonId = styled.p`
   font-size: 13px;
 `
 
-export const PokemonCard = ({pokemon}) => {
+const CardButton = styled.button`
+  padding: 2px 10px;
+  background-color:#ff0000;
+  border: none;
+  border-radius: 4px;
+  color:#ffffff;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover{
+    background-color:#C80036;
+  }
+`
+
+export const PokemonCard = ({pokemon, onClick}) => {
+
   return(
-    <PokemonCardBox>
+    <PokemonCardBox onClick = {()=>onClick(pokemon.id)}>
       <img src = {pokemon.img_url} alt = {pokemon.korean_name}/>
       <PokemonName>{pokemon.korean_name}</PokemonName>
       <PokemonId>No.{pokemon.id}</PokemonId>
+      <CardButton>추가</CardButton>
     </PokemonCardBox>
   );
 };
