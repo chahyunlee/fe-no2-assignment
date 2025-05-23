@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import MOCK_DATA from '../data/mock';
 import { Dashboard } from '../components/Dashboard/Dashboard';
 import { PokemonList } from '../components/PokemonList/PokemonList'
@@ -15,10 +16,16 @@ const Container = styled.div`
 `;
 
 export const DexPage = () => {
+  const navigate = useNavigate()
+
+  const handleCardClick = (id) => {
+    navigate(`/dex/${id}`)
+  }
+
   return (
     <Container>
       <Dashboard />
-      <PokemonList pokemons={MOCK_DATA}/>
+      <PokemonList pokemons={MOCK_DATA} onCardClick = {handleCardClick}/>
     </Container>
   );
 };
