@@ -14,16 +14,17 @@ const Container = styled.div`
 
   background-color : #f8f8f8;
   border-radius: 8px;
-  height: 30vh;
+  height: 40vh;
 
   position: relative;
 `;
 
 const HeadText = styled.h1`
   margin-top : 20px;
+  margin-bottom: 20px;
   color: #ff0000;
-  font-weight: 600;
-  font-size: 28px;
+  font-weight: 500;
+  font-size: 25px;
 `;
 
 const MyPokemonDex = styled.div`
@@ -50,8 +51,8 @@ const PokemonBox = styled.div`
 `;
 
 const DefaultImg = styled.img`
-  width: 60%;
-  height: 60%;
+  width: 50%;
+  height: 50%;
 `;
 
 export const Dashboard = () => {
