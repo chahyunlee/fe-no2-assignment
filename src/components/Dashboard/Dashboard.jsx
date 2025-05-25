@@ -14,7 +14,7 @@ const Container = styled.div`
 
   background-color : #f8f8f8;
   border-radius: 8px;
-  height: 40vh;
+  height: 36vh;
 
   position: relative;
 `;
@@ -23,7 +23,7 @@ const HeadText = styled.h1`
   margin-top : 20px;
   margin-bottom: 20px;
   color: #ff0000;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 25px;
 `;
 
