@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import defaultImg from '../../assets/pokemonBall.png';
+import { useSelector } from 'react-redux'
 import { PokemonCard } from '../PokemonCard/PokemonCard'
-import { usePokemon } from '../../contexts/PokemonContext'
 
 const MAX_POKEMON = 6;
 
@@ -55,7 +55,7 @@ const DefaultImg = styled.img`
 `;
 
 export const Dashboard = () => {
-  const { myPokemonCards } = usePokemon()
+  const myPokemonCards = useSelector(state => state.pokemon.myPokemonCards);
   const emptySlots = MAX_POKEMON - myPokemonCards.length
 
   return (
