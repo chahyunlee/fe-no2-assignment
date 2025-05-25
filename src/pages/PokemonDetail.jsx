@@ -3,7 +3,8 @@ import styled from 'styled-components'
 import MOCK_DATA from '../data/mock'
 import { toast } from 'react-toastify'
 import { useNavigate, useParams } from 'react-router-dom';
-import { usePokemon } from '../contexts/PokemonContext'
+import { useSelector, useDispatch } from 'react-redux'
+import { addCard, removeCard } from '../store/pokemonSlice'
 
 const Container = styled.div`
   display: flex;
@@ -59,7 +60,8 @@ const ActionButton = styled.button`
 export const PokemonDetailPage = () => {
   const {id} = useParams();
   const navigate = useNavigate()
-  const { myPokemonCards, addCard, removeCard } = usePokemon()
+  const dispatch = useDispatch()
+  const myPokemonCards = useSelector(state => state.pokemon.myPokemonCards)
 
   const pokemon = MOCK_DATA.find(pokemonInfo => String(pokemonInfo.id) === id)
   const isInDashboard = myPokemonCards.some(p => p.id === pokemon?.id)
@@ -70,14 +72,14 @@ export const PokemonDetailPage = () => {
 
   const handleAction = () => {
     if (isInDashboard) {
-      removeCard(pokemon.id)
+      dispatch(removeCard(pokemon.id))
       toast.success(`[${pokemon.korean_name }] 카드가 삭제되었습니다!`)
     } else {
       if (myPokemonCards.length >= 6) {
         toast.warn('카드는 6개까지만 선택할 수 있습니다!')
         return
       }
-      addCard(pokemon)
+      dispatch(addCard(pokemon))
       toast.success(`[${pokemon.korean_name }] 카드가 추가되었습니다!`)
     }
   }

@@ -1,14 +1,12 @@
 import React from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import AppRouter from './routes/AppRouter'
-import { PokemonProvider } from './contexts/PokemonContext'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
   return (
     <Router>
-      <PokemonProvider>
         <AppRouter />
           <ToastContainer
             position="top-center"
@@ -19,7 +17,6 @@ function App() {
             pauseOnHover
             draggable
           />
-      </PokemonProvider>
     </Router>
   )
 }
