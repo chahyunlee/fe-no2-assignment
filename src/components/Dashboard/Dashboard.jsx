@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import defaultImg from '../../assets/pokemonBall.png';
 import { PokemonCard } from '../PokemonCard/PokemonCard'
+import { usePokemon } from '../../contexts/PokemonContext'
 
 const MAX_POKEMON = 6;
 
@@ -13,7 +14,7 @@ const Container = styled.div`
 
   background-color : #f8f8f8;
   border-radius: 8px;
-  height: 25vh;
+  height: 30vh;
 
   position: relative;
 `;
@@ -53,19 +54,19 @@ const DefaultImg = styled.img`
   height: 60%;
 `;
 
-export const Dashboard = ({cards, onRemove}) => {
-  const emptySlots = MAX_POKEMON - cards.length
+export const Dashboard = () => {
+  const { myPokemonCards } = usePokemon()
+  const emptySlots = MAX_POKEMON - myPokemonCards.length
 
   return (
     <Container>
       <HeadText>나만의 포켓몬</HeadText>
       <MyPokemonDex>
         {/*selected cards rendering*/}
-        {cards.map((pokemon) => (
+        {myPokemonCards.map((pokemon) => (
           <PokemonCard
             key={pokemon.id}
             pokemon={pokemon}
-            onButtonClick={() => onRemove(pokemon.id)}
             mode="dashboard"
           />
         ))}
