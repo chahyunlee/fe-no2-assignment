@@ -48,14 +48,36 @@ const CardButton = styled.button`
   }
 `
 
-export const PokemonCard = ({pokemon, onClick}) => {
+export const PokemonCard = ({
+  pokemon, 
+  onCardClick, 
+  onButtonClick, 
+  mode = "dex"
+}) => {
+  const isDashboard = mode === "dashboard"
+
+  const handleCardClick = () => {
+    onCardClick?.(pokemon.id)
+  }
+
+  const handleButtonClick = (e) => {
+    e.stopPropagation()
+    if (isDashboard) {
+      onButtonClick?.(pokemon.id)
+    } else {
+      onButtonClick?.(pokemon)
+    }
+  }
 
   return(
-    <PokemonCardBox onClick = {()=>onClick(pokemon.id)}>
+    <PokemonCardBox onClick={handleCardClick}>
       <img src = {pokemon.img_url} alt = {pokemon.korean_name}/>
       <PokemonName>{pokemon.korean_name}</PokemonName>
       <PokemonId>No.{pokemon.id}</PokemonId>
-      <CardButton>추가</CardButton>
+      <CardButton 
+        onClick={handleButtonClick}>
+        {isDashboard ? '삭제' : '추가'}
+      </CardButton>
     </PokemonCardBox>
   );
 };
