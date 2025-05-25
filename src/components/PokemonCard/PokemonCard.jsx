@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify'
+import { usePokemon } from '../../contexts/PokemonContext'
 
 const PokemonCardBox = styled.div`
   display: flex;
@@ -48,36 +51,36 @@ const CardButton = styled.button`
   }
 `
 
-export const PokemonCard = ({
-  pokemon, 
-  onCardClick, 
-  onButtonClick, 
-  mode = "dex"
-}) => {
-  const isDashboard = mode === "dashboard"
+export const PokemonCard = ({ pokemon, mode = 'dex'}) => {
+  const { myPokemonCards, addCard, removeCard } = usePokemon()
+  const isDashboard = mode === 'dashboard'
+  const navigate = useNavigate()
 
   const handleCardClick = () => {
-    onCardClick?.(pokemon.id)
+    if (!isDashboard) navigate(`/dex/${pokemon.id}`)
   }
 
   const handleButtonClick = (e) => {
     e.stopPropagation()
     if (isDashboard) {
-      onButtonClick?.(pokemon.id)
+      removeCard(pokemon.id)
+      toast.success('카드가 삭제되었습니다!')
     } else {
-      onButtonClick?.(pokemon)
+      if (myPokemonCards.length >= 6) return toast.warn('카드는 최대 6개까지 선택할 수 있습니다!')
+      if (myPokemonCards.some(p => p.id === pokemon.id)) return toast.info('이미 추가된 포켓몬이에요!')
+      addCard(pokemon)
+      toast.success('카드가 추가되었습니다!')
     }
   }
 
-  return(
+  return (
     <PokemonCardBox onClick={handleCardClick}>
-      <img src = {pokemon.img_url} alt = {pokemon.korean_name}/>
+      <img src={pokemon.img_url} alt={pokemon.korean_name} />
       <PokemonName>{pokemon.korean_name}</PokemonName>
       <PokemonId>No.{pokemon.id}</PokemonId>
-      <CardButton 
-        onClick={handleButtonClick}>
+      <CardButton onClick={handleButtonClick}>
         {isDashboard ? '삭제' : '추가'}
       </CardButton>
     </PokemonCardBox>
-  );
-};
+  )
+}

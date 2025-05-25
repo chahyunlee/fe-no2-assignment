@@ -13,15 +13,13 @@ const GridContainer = styled.div`
   border-radius: 8px;
 `
 
-export const PokemonList = ({pokemons, onCardClick, onButtonClick}) => {
+export const PokemonList = ({pokemons}) => {
   return(
     <GridContainer>
       {pokemons.map(pokemon => (
         <PokemonCard 
           key={pokemon.id} 
           pokemon={pokemon}
-          onCardClick={onCardClick}
-          onButtonClick={onButtonClick}
           mode = "dex"
         />
       ))}
