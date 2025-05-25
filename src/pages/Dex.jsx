@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { toast } from 'react-toastify'
 import MOCK_DATA from '../data/mock';
 import { Dashboard } from '../components/Dashboard/Dashboard';
 import { PokemonList } from '../components/PokemonList/PokemonList'
@@ -25,12 +26,12 @@ export const DexPage = () => {
 
   const handleAddCard = (pokemon) => {
     if (myPokemonCards.length >= 6) {
-      alert("카드는 최대 6개까지 선택할 수 있어요!")
+      toast.warn("카드는 최대 6개까지 선택할 수 있어요!")
       return
     }
     const alreadyExists = myPokemonCards.some(p => p.id === pokemon.id)
     if (alreadyExists) {
-    alert("이미 추가된 포켓몬이에요!")
+      toast.info("이미 추가된 포켓몬이에요!")
     return
   }
   setMyPokemonCards(prev => [...prev, pokemon])
