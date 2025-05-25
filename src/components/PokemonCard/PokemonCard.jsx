@@ -64,12 +64,12 @@ export const PokemonCard = ({ pokemon, mode = 'dex'}) => {
     e.stopPropagation()
     if (isDashboard) {
       removeCard(pokemon.id)
-      toast.success('카드가 삭제되었습니다!')
+      toast.success(`[${pokemon.korean_name }] 카드가 삭제되었습니다!`)
     } else {
-      if (myPokemonCards.length >= 6) return toast.warn('카드는 최대 6개까지 선택할 수 있습니다!')
-      if (myPokemonCards.some(p => p.id === pokemon.id)) return toast.info('이미 추가된 포켓몬이에요!')
+      if (myPokemonCards.length >= 6) return toast.warn('카드는 6개까지만 선택할 수 있습니다!')
+      if (myPokemonCards.some(p => p.id === pokemon.id)) return toast.info('이미 추가된 카드에요!')
       addCard(pokemon)
-      toast.success('카드가 추가되었습니다!')
+      toast.success(`[${pokemon.korean_name }] 카드가 추가되었습니다!`)
     }
   }
 

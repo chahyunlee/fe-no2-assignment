@@ -14,7 +14,7 @@ const Container = styled.div`
 
   background-color : #f8f8f8;
   border-radius: 8px;
-  height: 25vh;
+  height: 30vh;
 
   position: relative;
 `;
